@@ -1,13 +1,13 @@
-package cn.com.duiba.credits.sdk.result;
+package cn.com.duiba.credits.sdk;
 
-public class CreditConsumeResult {
+public class AddCreditResult {
 
 	private boolean success;
 	private String errorMessage="";
 	private String bizId="";
 	private Long credits=-1L;//用户积分余额
 	
-	public CreditConsumeResult(boolean success){
+	public AddCreditResult(boolean success){
 		this.success=success;
 	}
 	

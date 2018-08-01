@@ -1,4 +1,4 @@
-package cn.com.duiba.credits.sdk.entity;
+package cn.com.duiba.credits.sdk;
 
 import java.util.Date;
 

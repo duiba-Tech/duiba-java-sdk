@@ -1,6 +1,9 @@
-package cn.com.duiba.credits.sdk.entity;
+package cn.com.duiba.credits.sdk;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import cn.com.duiba.credits.sdk.SignTool;
 
 
 public class AddCreditsParams {
@@ -11,9 +14,35 @@ public class AddCreditsParams {
 	private String orderNum="";//兑吧订单号
 	private String description="";
 	private String type="";//积分活类型，活动和签到
-	private String uid="";
+	private String uid="";//用户唯一id
 	private String ip="";//用户兑换时使用的ip地址，有可能为空
 	private String transfer="";//非必须参数
+
+	public Map<String, String> toRequestMap(String appSecret){
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("credits", credits+"");
+		map.put("description", description);
+		map.put("uid", uid);
+		map.put("appKey", appKey);
+		map.put("appSecret", appSecret);
+		map.put("timestamp",  System.currentTimeMillis()+"");
+		map.put("orderNum", orderNum);
+		map.put("type", type);
+		map.put("ip", ip);
+		putIfNotEmpty(map, "transfer", transfer);
+		String sign=SignTool.sign(map);
+		map.remove("appSecret");
+		map.put("sign", sign);
+		return map;
+	}
+
+	private void putIfNotEmpty(Map<String, String> map,String key,String value){
+		if(value==null || value.length()==0){
+			return;
+		}
+		map.put(key, value);
+	}
+
 	public Long getCredits() {
 		return credits;
 	}

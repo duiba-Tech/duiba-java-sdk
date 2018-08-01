@@ -1,4 +1,4 @@
-package cn.com.duiba.credits.sdk.entity;
+package cn.com.duiba.credits.sdk;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +15,8 @@ public class CreditNotifyParams {
 	private Date timestamp=new Date();
 	private String appKey;
 	private String uid="";
-
+	private String transfer="";
+	
 	public boolean isSuccess() {
 		return success;
 	}
@@ -63,7 +64,7 @@ public class CreditNotifyParams {
 		map.put("bizId", getString(bizId));
 		map.put("appKey", getString(appKey));
 		map.put("appSecret", getString(appSecret));
-		map.put("timestamp",getString( timestamp.getTime()));
+		map.put("timestamp", System.currentTimeMillis()+"");
 		map.put("uid", getString(uid));
 		map.put("orderNum", getString(orderNum));
 		
@@ -93,4 +94,10 @@ public class CreditNotifyParams {
 		this.orderNum = orderNum;
 	}
 	
+	public String getTransfer() {
+		return transfer;
+	}
+	public void setTransfer(String transfer) {
+		this.transfer = transfer;
+	}
 }

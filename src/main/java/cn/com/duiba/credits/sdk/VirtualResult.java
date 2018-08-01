@@ -1,4 +1,4 @@
-package cn.com.duiba.credits.sdk.result;
+package cn.com.duiba.credits.sdk;
 
 public class VirtualResult {
 
@@ -16,7 +16,7 @@ public class VirtualResult {
 		if(status=="success"){
 			return "{'status':'success','credits':'"+credits+"','supplierBizId':'"+supplierBizId+"'}";
 		}else if(status=="process"){
-			return "{'status':'success','credits':'"+credits+"','supplierBizId':'"+supplierBizId+"'}";
+			return "{'status':'process','credits':'"+credits+"','supplierBizId':'"+supplierBizId+"'}";
 		}else 
 			return "{'status':'fail','errorMessage':'"+errorMessage+"','supplierBizId':'"+supplierBizId+"'}";
 			

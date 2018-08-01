@@ -1,4 +1,4 @@
-package cn.com.duiba.credits.sdk.entity;
+package cn.com.duiba.credits.sdk;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,11 +15,13 @@ public class VirtualParams {
 	private String appKey;//应用标示appKey
 	private Date timestamp;//时间戳,当前时间毫秒值
 	private Long credits;//积分
-	private String supplierBizId="";//充值流水号
+	private String developBizId="";//充值流水号
 	private String uid="";//用户id
 	private String description="";//虚拟商品标示符
 	private String orderNum="";//兑吧订单号
 	private String account="";//虚拟商品充值账号，非必须参数
+	private String transfer="";//非必须参数
+	
 	public String getAccount() {
 		return account;
 	}
@@ -58,13 +60,14 @@ public class VirtualParams {
 		map.put("description", description);
 		map.put("uid", uid);
 		map.put("appKey", appKey);
-		map.put("supplierBizId", supplierBizId);
+		map.put("developBizId", developBizId);
 		map.put("appSecret", appSecret);
-		map.put("timestamp", timestamp.getTime()+"");
+		map.put("timestamp",  System.currentTimeMillis()+"");
 		map.put("orderNum", orderNum);
 		map.put("params", params);
-		
-		
+		putIfNotEmpty(map, "transfer", transfer);
+		putIfNotEmpty(map, "account", account);
+
 		
 		String sign=SignTool.sign(map);
 		
@@ -72,7 +75,14 @@ public class VirtualParams {
 		map.put("sign", sign);
 		return map;
 	}
-	
+
+	private void putIfNotEmpty(Map<String, String> map,String key,String value){
+		if(value==null || value.length()==0){
+			return;
+		}
+		map.put(key, value);
+	}
+
 	public String getUid() {
 		return uid;
 	}
@@ -85,11 +95,11 @@ public class VirtualParams {
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
-	public String getSupplierBizId() {
-		return supplierBizId;
+	public String getDevelopBizId() {
+		return developBizId;
 	}
-	public void setSupplierBizId(String supplierBizId) {
-		this.supplierBizId = supplierBizId;
+	public void setDevelopBizId(String developBizId) {
+		this.developBizId = developBizId;
 	}
 	public String getParams() {
 		return params;
@@ -98,6 +108,11 @@ public class VirtualParams {
 		this.params = params;
 	}
 	
-	
+	public String getTransfer() {
+		return transfer;
+	}
+	public void setTransfer(String transfer) {
+		this.transfer = transfer;
+	}
 }
 

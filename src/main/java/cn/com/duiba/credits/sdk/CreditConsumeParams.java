@@ -1,4 +1,4 @@
-package cn.com.duiba.credits.sdk.entity;
+package cn.com.duiba.credits.sdk;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class CreditConsumeParams {
 		map.put("appKey", appKey);
 		map.put("waitAudit", waitAudit+"");
 		map.put("appSecret", appSecret);
-		map.put("timestamp", timestamp.getTime()+"");
+		map.put("timestamp", System.currentTimeMillis()+"");
 		map.put("orderNum", orderNum);
 		map.put("type", type);
 		map.put("facePrice", facePrice+"");

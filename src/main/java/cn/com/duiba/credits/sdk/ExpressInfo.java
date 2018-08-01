@@ -1,4 +1,4 @@
-package cn.com.duiba.credits.sdk.entity;
+package cn.com.duiba.credits.sdk;
 
 /**
  * 构建开发者批量发货的发货信息

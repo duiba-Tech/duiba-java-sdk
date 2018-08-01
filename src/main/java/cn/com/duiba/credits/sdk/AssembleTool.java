@@ -1,27 +1,36 @@
 package cn.com.duiba.credits.sdk;
 
-import java.io.UnsupportedEncodingException;
+
 import java.net.URLEncoder;
 import java.util.Map;
+import java.util.logging.Logger;
+
 
 public class AssembleTool {
 
-	public static String assembleUrl(String url,Map<String, String> params){
-		if(!url.endsWith("?")){
-			url+="?";
+	public static String assembleUrl(String urlPar,Map<String, String> params){
+		Logger log = Logger.getLogger("assembleUrl");
+		StringBuilder str = new StringBuilder(urlPar);
+		if (str.toString().endsWith("?")) {
+
+		} else if(str.toString().contains("?")){
+			str.append("&");
+		}else{
+			str.append("?");
 		}
-		for(String key:params.keySet()){
+
+		for (Map.Entry<String, String> entry : params.entrySet()) {
 			try {
-				if(params.get(key)==null || params.get(key).length()==0){
-					url+=key+"="+params.get(key)+"&";
-				}else{
-					url+=key+"="+URLEncoder.encode(params.get(key), "utf-8")+"&";
+				if (entry.getValue() == null || entry.getValue().length() == 0) {
+					str.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+				} else {
+					str.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "utf-8")).append("&");
 				}
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				log.info("assembleUrl:="+e);
 			}
 		}
-		return url;
+		return str.toString();
 	}
 	
 }
