@@ -57,6 +57,7 @@ public class CreditNotifyParams {
 		this.appKey = appKey;
 	}
 	
+	
 	public Map<String, String> toRequestMap(String appSecret){
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("success", success+"");
@@ -64,15 +65,20 @@ public class CreditNotifyParams {
 		map.put("bizId", getString(bizId));
 		map.put("appKey", getString(appKey));
 		map.put("appSecret", getString(appSecret));
-		map.put("timestamp", System.currentTimeMillis()+"");
+		putIfNotEmpty(map, "transfer", transfer);
+		map.put("timestamp",getString( timestamp.getTime()));
 		map.put("uid", getString(uid));
 		map.put("orderNum", getString(orderNum));
-		
 		String sign=SignTool.sign(map);
-		
 		map.remove("appSecret");
 		map.put("sign", sign);
 		return map;
+	}
+	private void putIfNotEmpty(Map<String, String> map,String key,String value){
+		if(value==null || value.length()==0){
+			return;
+		}
+		map.put(key, value);
 	}
 	
 	private String getString(Object o){
