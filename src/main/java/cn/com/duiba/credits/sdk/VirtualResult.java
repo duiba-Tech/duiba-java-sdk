@@ -13,9 +13,9 @@ public class VirtualResult {
 	
 	
 	public String toString(){
-		if(status=="success"){
+		if(status.equals("success")){
 			return "{'status':'success','credits':'"+credits+"','supplierBizId':'"+supplierBizId+"'}";
-		}else if(status=="process"){
+		}else if(status.equals("process")){
 			return "{'status':'process','credits':'"+credits+"','supplierBizId':'"+supplierBizId+"'}";
 		}else 
 			return "{'status':'fail','errorMessage':'"+errorMessage+"','supplierBizId':'"+supplierBizId+"'}";
